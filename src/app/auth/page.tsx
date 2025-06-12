@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { saveUserToStorage, validatePhone, getUserFromStorage } from "@/utils"
 import { Input, Button } from "@/components/ui"
 import { IRandomUserResponse } from "@/types/user"
+import { toast } from "react-toastify"
 
 const AuthPage: React.FC = () => {
   const router = useRouter()
@@ -56,11 +57,13 @@ const AuthPage: React.FC = () => {
         const user = data.results[0]
         saveUserToStorage(user)
         router.push("/dashboard")
+        toast.success('Welcome to the Dashboard!');
       } else {
         throw new Error("اطلاعات کاربر دریافت نشد")
       }
     } catch (error) {
       setPhoneError("خطا در ورود. لطفاً دوباره تلاش کنید.")
+      toast.error('خطا در ورود. لطفاً دوباره تلاش کنید!');
     } finally {
       setLoading(false)
     }

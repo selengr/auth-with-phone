@@ -70,11 +70,12 @@ const DashboardPage: React.FC = () => {
               </span>
               <span className={styles.userEmail}>{user.email}</span>
             </div>
-            <Button variant="secondary" onClick={handleLogout} className={styles.logoutButton}>
-              خروج
-            </Button>
           </div>
         </div>
+        <button
+                 onClick={handleLogout} className={styles.logoutButton}>
+              خروج
+            </button>
       </header>
 
       <main className={styles.main}>
