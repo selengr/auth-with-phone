@@ -1,10 +1,13 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 import styles from "./auth.module.scss"
+import { useRouter } from "next/navigation"
+
+import { saveUserToStorage, validatePhone, getUserFromStorage } from "@/utils"
 import { Input, Button } from "@/components/ui"
+import { IRandomUserResponse } from "@/types/user"
 
 const AuthPage: React.FC = () => {
   const router = useRouter()
@@ -13,13 +16,32 @@ const AuthPage: React.FC = () => {
   const [phoneError, setPhoneError] = useState("")
 
 
-  const handlePhoneChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const existingUser = getUserFromStorage()
+    if (existingUser) {
+      router.push("/dashboard")
+    }
+  }, [router])
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setPhone(value)
+
+    if (phoneError) {
+      setPhoneError("")
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    const phoneValidationError = validatePhone(phone)
+    if (phoneValidationError) {
+      setPhoneError(phoneValidationError)
+      return
+    }
+
+    setLoading(true)
 
     try {
       const response = await fetch("https://randomuser.me/api/?results=1&nat=us")
@@ -28,23 +50,22 @@ const AuthPage: React.FC = () => {
         throw new Error("خطا در دریافت اطلاعات کاربر")
       }
 
-      const data = await response.json()
+      const data: IRandomUserResponse = await response.json()
 
       if (data.results && data.results.length > 0) {
         const user = data.results[0]
-          console.log('================>',user);
+        saveUserToStorage(user)
         router.push("/dashboard")
       } else {
         throw new Error("اطلاعات کاربر دریافت نشد")
       }
-
     } catch (error) {
       setPhoneError("خطا در ورود. لطفاً دوباره تلاش کنید.")
     } finally {
       setLoading(false)
     }
-
   }
+  
 
   return (
     <div className={styles.authContainer}>

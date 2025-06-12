@@ -1,75 +1,87 @@
 .authContainer {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1rem;
-  
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem;
+
+  .authCard {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 400px;
+
+    .title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      text-align: center;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 2rem;
+      font-size: 0.875rem;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .phoneInputContainer {
+        position: relative;
+
+        .phonePrefix {
+          position: absolute;
+          left: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #6b7280;
+          font-size: 0.875rem;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .phoneInput {
+          padding-left: 3rem !important;
+          direction: ltr;
+          text-align: left;
+        }
+      }
+
+      .submitButton {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .authContainer {
+    padding: 0.5rem;
+
     .authCard {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      width: 100%;
-      max-width: 400px;
-  
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+
       .title {
-        font-size: 1.875rem;
-        font-weight: 700;
-        text-align: center;
-        color: #1f2937;
-        margin-bottom: 0.5rem;
-      }
-  
-      .subtitle {
-        text-align: center;
-        color: #6b7280;
-        margin-bottom: 2rem;
-        font-size: 0.875rem;
-      }
-  
-      .form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-  
-        .phoneInputContainer {
-          position: relative;
-  
-          .phonePrefix {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6b7280;
-            font-size: 0.875rem;
-            pointer-events: none;
-            z-index: 1;
-          }
-  
-          .phoneInput {
-            padding-left: 3rem !important;
-            direction: ltr;
-            text-align: left;
-          }
-        }
-  
-        .submitButton {
-          margin-top: 0.5rem;
-        }
-      }
-  
-      .footer {
-        text-align: center;
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid #e5e7eb;
-        color: #6b7280;
-        font-size: 0.75rem;
+        font-size: 1.5rem;
       }
     }
   }
-  
-
-  
+}
