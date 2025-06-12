@@ -11,51 +11,52 @@
     position: relative;
     flex-direction : row;
 
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--border-color);
+      }
+
+      .userDetails {
+        display: flex;
+        flex-direction: column;
+
+        .userName {
+          font-weight: 500;
+          color: var(--text-primary);
+          font-size: 0.875rem;
+        }
+
+        .userEmail {
+          color: var(--text-secondary);
+          font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }     
+    }
+
     .headerContent {
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-left : 12rem;
 
       .logo {
         font-size: 1.5rem;
         font-weight: 700;
         color: var(--text-primary);
-      }
-
-      .userInfo {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        .avatar {
-          width: 2.5rem;
-          height: 2.5rem;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 2px solid var(--border-color);
-        }
-
-        .userDetails {
-          display: flex;
-          flex-direction: column;
-
-          .userName {
-            font-weight: 500;
-            color: var(--text-primary);
-            font-size: 0.875rem;
-          }
-
-          .userEmail {
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-          }
-
-          @media (max-width: 768px) {
-            display: none;
-          }
-        }     
       }
     }
 
@@ -95,7 +96,7 @@
 
   .main {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 24 auto;
     padding: 2rem;
 
     .welcomeCard {
@@ -131,7 +132,7 @@
         background: var(--bg-secondary);
         border-radius: 0.75rem;
         padding: 1.5rem;
-        margin-top: 2rem;
+        margin-top: 3rem;
         text-align: left;
         border: 1px solid var(--border-color);
 
@@ -139,13 +140,14 @@
           font-size: 1.25rem;
           font-weight: 600;
           color: var(--text-primary);
-          margin-bottom: 1rem;
+          margin-bottom: 3rem;
         }
 
         .userGrid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
           gap: 1rem;
+          direction : ltr;
 
           .userField {
             .fieldLabel {

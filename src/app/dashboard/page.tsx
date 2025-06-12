@@ -1,34 +1,35 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui"
-import { getUserFromStorage, removeUserFromStorage } from "@/utils"
-import type { IRandomUser } from "@/types/user"
-import styles from "./dashboard.module.scss"
+import Image from "next/image";
+import type React from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui";
+import { getUserFromStorage, removeUserFromStorage } from "@/utils";
+import type { IRandomUser } from "@/types/user";
+import styles from "./dashboard.module.scss";
 
 const DashboardPage: React.FC = () => {
-  const [user, setUser] = useState<IRandomUser | null>(null)
-  const [loading, setLoading] = useState(true)
-  const router = useRouter()
+  const [user, setUser] = useState<IRandomUser | null>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
-    const userData = getUserFromStorage()
+    const userData = getUserFromStorage();
 
     if (!userData) {
-      router.push("/auth")
-      return
+      router.push("/auth");
+      return;
     }
 
-    setUser(userData)
-    setLoading(false)
-  }, [router])
+    setUser(userData);
+    setLoading(false);
+  }, [router]);
 
   const handleLogout = () => {
-    removeUserFromStorage()
-    router.push("/auth")
-  }
+    removeUserFromStorage();
+    router.push("/auth");
+  };
 
   if (loading) {
     return (
@@ -46,23 +47,23 @@ const DashboardPage: React.FC = () => {
           در حال بارگذاری...
         </div>
       </div>
-    )
+    );
   }
 
   if (!user) {
-    return null
+    return null;
   }
 
   return (
     <div className={styles.dashboardContainer}>
       <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <div className={styles.logo}>داشبورد</div>
           <div className={styles.userInfo}>
-            <img
-              src={user.picture.medium || "/placeholder.svg"}
+            <Image
+              src={user.picture.medium}
               alt={`${user.name.first} ${user.name.last}`}
               className={styles.avatar}
+              height={40}
+              width={40}
             />
             <div className={styles.userDetails}>
               <span className={styles.userName}>
@@ -71,55 +72,55 @@ const DashboardPage: React.FC = () => {
               <span className={styles.userEmail}>{user.email}</span>
             </div>
           </div>
+        <div className={styles.headerContent}>
+          <div className={styles.logo}>Dashboard</div>
         </div>
-        <button
-                 onClick={handleLogout} className={styles.logoutButton}>
-              خروج
-            </button>
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          خروج
+        </button>
       </header>
 
       <main className={styles.main}>
         <div className={styles.welcomeCard}>
-          <h1 className={styles.welcomeTitle}>خوش آمدید به داشبورد!</h1>
-          <p className={styles.welcomeMessage}>سلام {user.name.first}، به داشبورد شخصی خود خوش آمدید.</p>
+          <h1 className={styles.welcomeTitle}>Welcome to the Dashboard!</h1>
+          <p className={styles.welcomeMessage}>
+          👋🏻😍 Hi {user.name.first}
+          </p>
 
           <div className={styles.userCard}>
-            <h2 className={styles.userCardTitle}>اطلاعات کاربری</h2>
+            <h2 className={styles.userCardTitle}>profile</h2>
             <div className={styles.userGrid}>
               <div className={styles.userField}>
-                <div className={styles.fieldLabel}>نام کامل</div>
+                <div className={styles.fieldLabel}>name</div>
                 <div className={styles.fieldValue}>
                   {user.name.title} {user.name.first} {user.name.last}
                 </div>
               </div>
               <div className={styles.userField}>
-                <div className={styles.fieldLabel}>ایمیل</div>
+                <div className={styles.fieldLabel}>email</div>
                 <div className={styles.fieldValue}>{user.email}</div>
               </div>
+
               <div className={styles.userField}>
-                <div className={styles.fieldLabel}>تلفن</div>
-                <div className={styles.fieldValue}>{user.phone}</div>
-              </div>
-              <div className={styles.userField}>
-                <div className={styles.fieldLabel}>موبایل</div>
+                <div className={styles.fieldLabel}>phone</div>
                 <div className={styles.fieldValue}>{user.cell}</div>
               </div>
               <div className={styles.userField}>
-                <div className={styles.fieldLabel}>شهر</div>
+                <div className={styles.fieldLabel}>city</div>
                 <div className={styles.fieldValue}>
                   {user.location.city}, {user.location.state}
                 </div>
               </div>
               <div className={styles.userField}>
-                <div className={styles.fieldLabel}>کشور</div>
+                <div className={styles.fieldLabel}>country</div>
                 <div className={styles.fieldValue}>{user.location.country}</div>
               </div>
               <div className={styles.userField}>
-                <div className={styles.fieldLabel}>سن</div>
+                <div className={styles.fieldLabel}>age</div>
                 <div className={styles.fieldValue}>{user.dob.age} سال</div>
               </div>
               <div className={styles.userField}>
-                <div className={styles.fieldLabel}>نام کاربری</div>
+                <div className={styles.fieldLabel}>username</div>
                 <div className={styles.fieldValue}>{user.login.username}</div>
               </div>
             </div>
@@ -127,7 +128,7 @@ const DashboardPage: React.FC = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardPage
+export default DashboardPage;
