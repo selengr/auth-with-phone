@@ -48,7 +48,7 @@ export const useAuthSubmit = (phone: string) => {
         throw new Error("User information not received.");
       }
     } catch (error) {
-      setError("Error. Please try again..");
+      setError(`Error. Please try again.. ${error}`);
       toast.error("Error. Please try again.!");
       return false;
     } finally {
