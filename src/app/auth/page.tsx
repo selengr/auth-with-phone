@@ -2,22 +2,48 @@
 
 import type React from "react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import styles from "./auth.module.scss"
 import { Input, Button } from "@/components/ui"
 
 const AuthPage: React.FC = () => {
+  const router = useRouter()
   const [phone, setPhone] = useState("")
   const [loading, setLoading] = useState(false)
   const [phoneError, setPhoneError] = useState("")
 
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    console.log('================>',value);
+    setPhone(value)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    try {
+      const response = await fetch("https://randomuser.me/api/?results=1&nat=us")
+
+      if (!response.ok) {
+        throw new Error("خطا در دریافت اطلاعات کاربر")
+      }
+
+      const data = await response.json()
+
+      if (data.results && data.results.length > 0) {
+        const user = data.results[0]
+          console.log('================>',user);
+        router.push("/dashboard")
+      } else {
+        throw new Error("اطلاعات کاربر دریافت نشد")
+      }
+
+    } catch (error) {
+      setPhoneError("خطا در ورود. لطفاً دوباره تلاش کنید.")
+    } finally {
+      setLoading(false)
+    }
+
   }
 
   return (
@@ -43,7 +69,7 @@ const AuthPage: React.FC = () => {
             />
           </div>
 
-          <Button type="submit" loading={loading} fullWidth className={styles.submitButton}>
+           <Button type="submit" loading={loading} fullWidth className={styles.submitButton}>
             {loading ? "در حال ورود..." : "ورود"}
           </Button>
         </form>
