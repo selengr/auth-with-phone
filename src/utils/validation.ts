@@ -1,7 +1,7 @@
 export const validatePhone = (phone: string): string | null => {
-  var regex = new RegExp('(0|98|0098|98)?([ ]|-|[()]){0,2}9[0-9]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}');
+  let regex = new RegExp('(0|98|0098|98)?([ ]|-|[()]){0,2}9[0-9]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}');
   
-    var result = regex.test(phone);
+    let result = regex.test(phone);
     if (!result) {
         return "phone number is not valid"
     }
