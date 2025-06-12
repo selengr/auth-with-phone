@@ -1,63 +1,63 @@
 .inputContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-  
-    .label {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #374151;
-      margin-bottom: 0.5rem;
-  
-      &.required::after {
-        content: " *";
-        color: #ef4444;
-      }
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+
+    &.required::after {
+      content: " *";
+      color: var(--error-color);
     }
-  
-    .input {
-      padding: 0.75rem 1rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      transition: all 0.2s ease-in-out;
-      background-color: white;
-  
+  }
+
+  .input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    &.error {
+      border-color: var(--error-color);
+
       &:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      }
-  
-      &.error {
-        border-color: #ef4444;
-        
-        &:focus {
-          border-color: #ef4444;
-          box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-        }
-      }
-  
-      &:disabled {
-        background-color: #f9fafb;
-        color: #6b7280;
-        cursor: not-allowed;
+        border-color: var(--error-color);
+        box-shadow: 0 0 0 3px var(--error-light);
       }
     }
-  
-    .errorMessage {
-      color: #ef4444;
+
+    &:disabled {
+      background-color: var(--bg-secondary);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      padding: 0.625rem 0.875rem;
       font-size: 0.875rem;
-      margin-top: 0.25rem;
     }
   }
-  
-  @media (max-width: 768px) {
-    .inputContainer {
-      .input {
-        padding: 0.625rem 0.875rem;
-        font-size: 0.875rem;
-      }
-    }
+
+  .errorMessage {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
   }
-  
+}
