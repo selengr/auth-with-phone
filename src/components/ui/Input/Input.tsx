@@ -16,7 +16,7 @@ const Input: React.FC<InputProps> = ({ label, error, required, className, ...pro
         </label>
       )}
       <input className={`${styles.input} ${error ? styles.error : ""} ${className || ""}`} {...props} />
-      {error && <span className={styles.errorMessage}>{error}</span>}
+      <span className={styles.errorMessage}>{error??""}</span>
     </div>
   )
 }

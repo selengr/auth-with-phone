@@ -45,13 +45,17 @@
 
         .phonePrefix {
           position: absolute;
-          left: 1rem;
+          left: .6rem;
           top: 50%;
           transform: translateY(-50%);
           color: var(--text-muted);
-          font-size: 0.875rem;
+          font-size: 1rem;
           pointer-events: none;
           z-index: 1;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+          display : flex;
+          justify-content : end;
         }
 
         .phoneInput {

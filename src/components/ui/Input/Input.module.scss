@@ -8,6 +8,8 @@
     font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
+    display : flex;
+    justify-content : end;
 
     &.required::after {
       content: " *";
@@ -59,5 +61,6 @@
     color: var(--error-color);
     font-size: 0.875rem;
     margin-top: 0.25rem;
+    height : .3rem
   }
 }

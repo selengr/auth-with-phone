@@ -76,7 +76,7 @@ const DashboardPage: React.FC = () => {
           <div className={styles.logo}>Dashboard</div>
         </div>
         <button onClick={handleLogout} className={styles.logoutButton}>
-          خروج
+          Sign out
         </button>
       </header>
 
