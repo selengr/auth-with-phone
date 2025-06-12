@@ -1,0 +1,42 @@
+.dashboardContainer {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  
+    .header {
+      background: white;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      padding: 1rem 2rem;
+
+    }
+  
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+  
+      .welcomeCard {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        text-align: center;
+  
+        .welcomeTitle {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #1f2937;
+          margin-bottom: 1rem;
+        }
+  
+        .welcomeMessage {
+          color: #6b7280;
+          font-size: 1.125rem;
+          margin-bottom: 2rem;
+        }
+ 
+      }
+    }
+  }
+  
+  
+  
