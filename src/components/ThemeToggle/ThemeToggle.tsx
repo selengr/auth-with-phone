@@ -2,7 +2,9 @@
 
 import type React from "react";
 import Image from "next/image";
+// contexts
 import { useTheme } from "@/contexts/Theme";
+// css
 import styles from "./ThemeToggle.module.scss";
 
 const ThemeToggle: React.FC = () => {

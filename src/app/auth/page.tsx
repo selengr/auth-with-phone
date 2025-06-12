@@ -1,25 +1,22 @@
 "use client";
 
 import type React from "react";
-import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 // css
 import styles from "./auth.module.scss";
 // components
 import { Input, Button } from "@/components/ui";
-// types
-import { IRandomUserResponse } from "@/types/user";
-// config
-import { HOST_API_KEY } from "../../../config-global";
+// hooks
+import { useAuthSubmit } from "@/hooks/useAuthSubmit";
 // utils
-import { saveUserToStorage, validatePhone, getUserFromStorage } from "@/utils";
+import { formatIranianPhone, getUserFromStorage } from "@/utils";
 
 const AuthPage: React.FC = () => {
   const router = useRouter();
   const [phone, setPhone] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [phoneError, setPhoneError] = useState<string>("");
+
+  const { handleSubmit, loading, error: phoneError, setError: setPhoneError } = useAuthSubmit(phone);
 
   useEffect(() => {
     const existingUser = getUserFromStorage();
@@ -29,47 +26,15 @@ const AuthPage: React.FC = () => {
   }, [router]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPhone(value);
+    const value = e.target.value
+    const formattedPhone = formatIranianPhone(value)
+    setPhone(formattedPhone)
+    
     if (phoneError) {
-      setPhoneError("");
+      setPhoneError("")
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const phoneValidationError = validatePhone(phone);
-    if (phoneValidationError) {
-      setPhoneError(phoneValidationError);
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const response = await fetch(`${HOST_API_KEY}/api/?results=1&nat=us`);
-
-      if (!response.ok) {
-        throw new Error("User information not received.");
-      }
-
-      const data: IRandomUserResponse = await response.json();
-
-      if (data.results && data.results.length > 0) {
-        const user = data.results[0];
-        saveUserToStorage(user);
-        router.push("/dashboard");
-        toast.success("Welcome to the Dashboard!");
-      } else {
-        throw new Error("User information not received.");
-      }
-    } catch (error) {
-      setPhoneError("Error. Please try again..");
-      toast.error("Error. Please try again.!");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className={styles.authContainer}>

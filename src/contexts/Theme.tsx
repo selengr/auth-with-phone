@@ -1,9 +1,11 @@
 "use client"
 
 import type React from "react"
-import styles from "@/components/ThemeToggle/ThemeToggle.module.scss"
-import ThemeToggle from "@/components/ThemeToggle/ThemeToggle"
 import { createContext, useContext, useEffect, useState } from "react"
+// css
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle"
+// components
+import styles from "@/components/ThemeToggle/ThemeToggle.module.scss"
 
 type Theme = "light" | "dark"
 

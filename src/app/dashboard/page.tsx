@@ -4,15 +4,16 @@ import Image from "next/image";
 import type React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui";
-import { getUserFromStorage, removeUserFromStorage } from "@/utils";
-import type { IRandomUser } from "@/types/user";
+// css
 import styles from "./dashboard.module.scss";
+// type
+import type { IRandomUser } from "@/types/user";
+// utils
+import { getUserFromStorage, removeUserFromStorage } from "@/utils";
 
 const DashboardPage: React.FC = () => {
-  const [user, setUser] = useState<IRandomUser | null>(null);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const [user, setUser] = useState<IRandomUser | null>(null);
 
   useEffect(() => {
     const userData = getUserFromStorage();
@@ -23,7 +24,6 @@ const DashboardPage: React.FC = () => {
     }
 
     setUser(userData);
-    setLoading(false);
   }, [router]);
 
   const handleLogout = () => {
@@ -31,27 +31,9 @@ const DashboardPage: React.FC = () => {
     router.push("/auth");
   };
 
-  if (loading) {
-    return (
-      <div className={styles.dashboardContainer}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            fontSize: "1.125rem",
-            color: "#6b7280",
-          }}
-        >
-          در حال بارگذاری...
-        </div>
-      </div>
-    );
-  }
 
   if (!user) {
-    return null;
+    return <>user not found</>;
   }
 
   return (
