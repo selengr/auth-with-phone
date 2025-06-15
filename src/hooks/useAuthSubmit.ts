@@ -7,10 +7,11 @@ import { useRouter } from "next/navigation";
 import { HOST_API_KEY } from "../../config-global";
 // types
 import type { IRandomUserResponse } from "@/types/user";
+import type { TDictionary } from "@/lib/dictionary-types"
 // utils
 import { saveUserToStorage, validatePhone } from "@/utils";
 
-export const useAuthSubmit = (phone: string, lang: any) => {
+export const useAuthSubmit = (phone: string, dictionary: TDictionary) => {
   const { push } = useRouter();
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,7 +21,7 @@ export const useAuthSubmit = (phone: string, lang: any) => {
 
     if(!phone) return
     
-    const phoneValidationError = validatePhone(phone, lang);
+    const phoneValidationError = validatePhone(phone, dictionary);
     if (phoneValidationError) {
       setError(phoneValidationError);
       return false;
@@ -33,7 +34,7 @@ export const useAuthSubmit = (phone: string, lang: any) => {
       const response = await fetch(`${HOST_API_KEY}/api/?results=1&nat=us`);
 
       if (!response.ok) {
-        throw new Error(lang.user_info_error)
+        throw new Error(dictionary.auth.user_info_error)
       }
 
       const data: IRandomUserResponse = await response.json();
@@ -42,15 +43,15 @@ export const useAuthSubmit = (phone: string, lang: any) => {
         const user = data.results[0];
         saveUserToStorage(user);
         push(`/dashboard`)
-        toast.success(lang.welcome_dashboard)
+        toast.success(dictionary.auth.welcome_dashboard)
         return true;
       } else {
-        throw new Error(lang.user_info_error)
+        throw new Error(dictionary.auth.user_info_error)
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : lang.login_error
-      setError(`${lang.login_error} ${errorMessage}`)
-      toast.error(lang.login_error)
+      const errorMessage = error instanceof Error ? error.message : dictionary.auth.login_error
+      setError(`${dictionary.auth.login_error} ${errorMessage}`)
+      toast.error(dictionary.auth.login_error)
       return false;
     } finally {
       setLoading(false);

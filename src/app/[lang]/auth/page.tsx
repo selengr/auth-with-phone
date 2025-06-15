@@ -1,5 +1,8 @@
+// config
 import { Locale } from '../../../../i18n.config'
+// dictionary
 import { getDictionary } from '@/lib/dictionary';
+// section
 import AuthPage from '@/section/auth/AuthPage';
 
 export default async function Page({
@@ -8,7 +11,7 @@ export default async function Page({
   params: Promise<{ lang: Locale }>
 }) {
   const { lang } = await params;
-  const { auth } = await getDictionary(lang)
+  const dictionary = await getDictionary(lang)
 
-  return <AuthPage lang={auth}/>
+  return <AuthPage dictionary={dictionary}/>
 }

@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import styles from "./auth.module.scss";
 // components
 import { Input, Button } from "@/components/ui";
+// types
+import type { TDictionary } from "@/lib/dictionary-types"
 // hooks
 import { useAuthSubmit } from "@/hooks/useAuthSubmit";
 // utils
@@ -15,16 +17,16 @@ import { formatIranianPhone, getUserFromStorage } from "@/utils";
 
 
 interface IProps {
-    lang : any
+    dictionary: TDictionary
  }
   
-  const AuthPage: NextPage<IProps> = ({lang}) => {
+  const AuthPage: NextPage<IProps> = ({dictionary}) => {
   const { push } = useRouter();
-
+  
   const [phone, setPhone] = useState<string>("");
   
 
-  const { handleSubmit, loading, error: phoneError, setError: setPhoneError } = useAuthSubmit(phone, lang);
+  const { handleSubmit, loading, error: phoneError, setError: setPhoneError } = useAuthSubmit(phone, dictionary);
 
   useEffect(() => {
     const existingUser = getUserFromStorage();
@@ -47,8 +49,8 @@ interface IProps {
   return (
     <div className={styles.authContainer}>
       <div className={styles.authCard}>
-        <h1 className={styles.title}>{lang.sign_in}</h1>
-        <p className={styles.subtitle}>{lang.enter_phone_number}</p>
+        <h1 className={styles.title}>{dictionary.auth.sign_in}</h1>
+        <p className={styles.subtitle}>{dictionary.auth.enter_phone_number}</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.phoneInputContainer}>
@@ -56,7 +58,7 @@ interface IProps {
             <Input
               id="phone"
               type="tel"
-              label={lang.phone_number}
+              label={dictionary.auth.phone_number}
               placeholder="912-345-6789"
               value={phone}
               onChange={handlePhoneChange}
@@ -74,11 +76,11 @@ interface IProps {
             disabled={phone.length === 0}
             className={styles.submitButton}
           >
-            {loading ? lang.submitting : lang.submit}
+            {loading ? dictionary.auth.submitting : dictionary.auth.submit}
           </Button>
         </form>
 
-        <div className={styles.footer}>{lang.welcome}</div>
+        <div className={styles.footer}>{dictionary.auth.welcome}</div>
       </div>
     </div>
   );

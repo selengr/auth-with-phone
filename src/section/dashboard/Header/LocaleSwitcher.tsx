@@ -1,44 +1,42 @@
-"use client";
+"use client"
 // React & Libs
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 // config
-import { i18n } from "../../../../i18n.config";
+import { i18n, type Locale } from "../../../../i18n.config"
 // css
-import styles from "@/components/ThemeToggle/ThemeToggle.module.scss";
+import styles from "@/components/ThemeToggle/ThemeToggle.module.scss"
 
 export default function LocaleSwitcher() {
-  const pathName = usePathname();
+  const pathName = usePathname()
 
-  const getCurrentLocale = () => {
-    if (!pathName) return i18n.defaultLocale;
-    const segments = pathName.split("/");
-    const potentialLocale = segments[1];
-    return i18n.locales.includes(potentialLocale as any)
-      ? (potentialLocale as (typeof i18n.locales)[number])
-      : i18n.defaultLocale;
-  };
+  const isValidLocale = (locale: string): locale is Locale => {
+    return i18n.locales.includes(locale as Locale)
+  }
 
-  const currentLocale = getCurrentLocale();
+  const getCurrentLocale = (): Locale => {
+    if (!pathName) return i18n.defaultLocale
+    const segments = pathName.split("/")
+    const potentialLocale = segments[1]
+    return isValidLocale(potentialLocale) ? potentialLocale : i18n.defaultLocale
+  }
 
-  const redirectedPathName = (locale: string) => {
-    if (!pathName) return `/${locale}`;
-    const segments = pathName.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
+  const currentLocale = getCurrentLocale()
 
-  const alternativeLocales = i18n.locales.filter(
-    (locale) => locale !== currentLocale
-  );
+  const redirectedPathName = (locale: Locale): string => {
+    if (!pathName) return `/${locale}`
+    const segments = pathName.split("/")
+    segments[1] = locale
+    return segments.join("/")
+  }
+
+  const alternativeLocales = i18n.locales.filter((locale): locale is Locale => locale !== currentLocale)
 
   return (
     <button className={styles.logoutButton}>
-      <Link
-        prefetch
-        href={redirectedPathName(alternativeLocales[0])} >
+      <Link prefetch href={redirectedPathName(alternativeLocales[0])}>
         {alternativeLocales[0]}
       </Link>
     </button>
-  );
+  )
 }

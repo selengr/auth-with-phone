@@ -6,14 +6,15 @@ import type React from "react"
 import styles from "../dashboard.module.scss"
 // types
 import type { IRandomUser } from "@/types/user"
+import type { TDictionary } from "@/lib/dictionary-types"
 
 interface HeaderProps {
-  lang: any
+  dictionary : TDictionary
   user: IRandomUser
   onLogout: () => void
 }
 
-const Header: React.FC<HeaderProps> = ({ user, onLogout, lang }) => {
+const Header: React.FC<HeaderProps> = ({ user, onLogout, dictionary }) => {
 
   return (
     <header className={styles.header}>
@@ -33,10 +34,10 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout, lang }) => {
         </div>
       </div>
       <div className={styles.headerContent}>
-        <div className={styles.logo}>{lang.dashboard.dashboard}</div>
+        <div className={styles.logo}>{dictionary.dashboard.index}</div>
       </div>
       <button onClick={onLogout} className={styles.logoutButton}>
-        {lang.dashboard.sign_out}
+        {dictionary.dashboard.sign_out}
       </button>
     </header>
   )

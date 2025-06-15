@@ -5,9 +5,6 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['randomuser.me','https://randomuser.me'],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 };
 
 export default nextConfig;

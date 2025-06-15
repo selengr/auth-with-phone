@@ -8,16 +8,20 @@ import { useRouter } from "next/navigation";
 import { Header, Body } from "@/section";
 // css
 import styles from "../dashboard.module.scss";
+// config
+import { Locale } from '../../../../i18n.config'
 // types
 import type { IRandomUser } from "@/types/user";
+import type { TDictionary } from "@/lib/dictionary-types"
 // utils
 import { getUserFromStorage, removeUserFromStorage } from "@/utils";
 
 interface IProps {
-    lang : any
+    lang : Locale;
+    dictionary : TDictionary
  }
   
-  const DashboardPage: NextPage<IProps> = ({lang}) => {
+  const DashboardPage: NextPage<IProps> = ({lang, dictionary}) => {
   const router = useRouter();
   const [user, setUser] = useState<IRandomUser | null>(null);
 
@@ -44,8 +48,8 @@ interface IProps {
 
   return (
     <div className={styles.dashboardContainer}>
-      <Header user={user} onLogout={handleLogout} lang={lang}/> 
-      <Body user={user} lang={lang}/>
+      <Header user={user} onLogout={handleLogout} dictionary={dictionary}/> 
+      <Body user={user} lang={lang} dictionary={dictionary}/>
     </div>
   );
 };
