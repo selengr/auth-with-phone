@@ -1,26 +1,28 @@
 export const validatePhone = (phone: string): string | null => {
-  const regex = new RegExp('(0|98|0098|98)?([ ]|-|[()]){0,2}9[0-9]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}');
-  
-    const result = regex.test(phone);
-    if (!result) {
-        return "phone number is not valid"
-    }
+  const cleanPhone = phone.replace(/\D/g, "")
 
-    if (phone.startsWith("0")) {
-      return "Phone numbers must not start with zero.";
-    }  
-  
-    return null
+  if (cleanPhone.length !== 10) {
+    return "Phone number must be exactly 10 digits"
   }
-  
 
-  export const formatIranianPhone = (phone: string): string => {
-    const cleanPhone = phone.replace(/\D/g, "")
-  
-    if (cleanPhone.length <= 4) return cleanPhone
-    if (cleanPhone.length <= 7) return `${cleanPhone.slice(0, 4)}-${cleanPhone.slice(4)}`
-    if (cleanPhone.length <= 11) return `${cleanPhone.slice(0, 4)}-${cleanPhone.slice(4, 7)}-${cleanPhone.slice(7)}`
-  
-    return `${cleanPhone.slice(0, 4)}-${cleanPhone.slice(4, 7)}-${cleanPhone.slice(7, 11)}`
+  if (!cleanPhone.startsWith("9")) {
+    return "Phone number must start with 9"
   }
-  
+
+  const regex = /^9[0-9]{9}$/
+  if (!regex.test(cleanPhone)) {
+    return "Phone number is not valid"
+  }
+
+  return null
+}
+
+export const formatIranianPhone = (phone: string): string => {
+  const cleanPhone = phone.replace(/\D/g, "")
+
+  if (cleanPhone.length <= 3) return cleanPhone
+  if (cleanPhone.length <= 6) return `${cleanPhone.slice(0, 3)}-${cleanPhone.slice(3)}`
+  if (cleanPhone.length <= 10) return `${cleanPhone.slice(0, 3)}-${cleanPhone.slice(3, 6)}-${cleanPhone.slice(6)}`
+
+  return `${cleanPhone.slice(0, 3)}-${cleanPhone.slice(3, 6)}-${cleanPhone.slice(6, 10)}`
+}

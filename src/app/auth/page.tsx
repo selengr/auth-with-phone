@@ -63,9 +63,10 @@ const AuthPage: React.FC = () => {
             type="submit"
             loading={loading}
             fullWidth
+            disabled={phone.length === 0}
             className={styles.submitButton}
           >
-            {loading ? "submitting..." : "submit"}
+            {loading ? "...submitting" : "submit"}
           </Button>
         </form>
 
