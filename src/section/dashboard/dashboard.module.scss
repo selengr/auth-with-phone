@@ -95,8 +95,11 @@
 
   .main {
     max-width: 1200px;
-    margin: 24 auto;
+    // margin: 24 auto;
+    display: flex;
     padding: 2rem;
+    width: 80%;
+    justify-self: center;
 
     .welcomeCard {
       background: var(--bg-primary);
@@ -105,6 +108,7 @@
       box-shadow: var(--shadow-md);
       text-align: center;
       border: 1px solid var(--border-color);
+      width: 100%;
 
       .welcomeTitle {
         font-size: 2rem;
@@ -180,6 +184,7 @@
 
     @media (max-width: 768px) {
       padding: 1rem;
+      width: 100%;
     }
   }
 }

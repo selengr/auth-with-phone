@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ user, onLogout, dictionary }) => {
     <header className={styles.header}>
       <div className={styles.userInfo}>
         <Image
-          src={user.picture.medium || "/placeholder.svg"}
+          src={user.picture.medium}
           alt={`${user.name.first} ${user.name.last}`}
           className={styles.avatar}
           height={40}
