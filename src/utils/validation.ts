@@ -1,17 +1,19 @@
-export const validatePhone = (phone: string): string | null => {
+export const validatePhone = (phone: string, lang : any ): string | null => {
   const cleanPhone = phone.replace(/\D/g, "")
 
   if (cleanPhone.length !== 10) {
-    return "Phone number must be exactly 10 digits"
+    if (cleanPhone.length !== 10) {
+      return lang.phone_validation_digits
+    }
   }
 
   if (!cleanPhone.startsWith("9")) {
-    return "Phone number must start with 9"
+    return lang.phone_validation_start_nine
   }
 
   const regex = /^9[0-9]{9}$/
   if (!regex.test(cleanPhone)) {
-    return "Phone number is not valid"
+    return lang.phone_validation_invalid
   }
 
   return null

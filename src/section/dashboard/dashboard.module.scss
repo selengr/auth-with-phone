@@ -80,7 +80,7 @@
 
       position: absolute;
       top: 1rem;
-      left: 4rem;
+      left: 7rem;
       z-index: 10;
   
       @media (max-width: 768px) {
@@ -146,7 +146,6 @@
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
           gap: 1rem;
-          direction : ltr;
 
           .userField {
             .fieldLabel {
@@ -168,6 +167,10 @@
             grid-template-columns: 1fr;
           }
         }
+      }
+
+      .isRTL {
+        text-align: right !important;
       }
 
       @media (max-width: 768px) {

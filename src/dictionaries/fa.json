@@ -1,0 +1,33 @@
+{
+    "auth": {
+      "sign_in": "ورود",
+      "enter_phone_number": "شماره تلفن خود را وارد کنید",
+      "phone_number": "شماره تلفن",
+      "submitting": "در حال ارسال...",
+      "submit": "ارسال",
+      "welcome": "خوش آمدید",
+      "phone_validation_required": "شماره تلفن الزامی است",
+      "phone_validation_digits": "شماره تلفن باید دقیقاً ۱۰ رقم باشد",
+      "phone_validation_start_nine": "شماره تلفن باید با ۹ شروع شود",
+      "phone_validation_invalid": "شماره تلفن معتبر نیست",
+      "welcome_dashboard": "به داشبورد خوش آمدید!",
+      "user_info_error": "اطلاعات کاربر دریافت نشد.",
+      "login_error": "خطا. لطفاً دوباره تلاش کنید.",
+      "network_error": "خطای شبکه. لطفاً اتصال خود را بررسی کنید."
+    },
+    "dashboard" : {
+      "index": "داشبورد",
+      "sign_out": "خروج",
+      "welcome_to_dashboard": "به داشبورد خوش آمدید!",
+      "hi_user": "سلام",
+      "profile": "پروفایل",
+      "name": "نام",
+      "email": "ایمیل",
+      "phone": "تلفن",
+      "city": "شهر",
+      "country": "کشور",
+      "age": "سن",
+      "username": "نام کاربری",
+      "years_old": "سال"
+    }
+  }

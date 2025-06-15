@@ -10,8 +10,8 @@ import type { IRandomUserResponse } from "@/types/user";
 // utils
 import { saveUserToStorage, validatePhone } from "@/utils";
 
-export const useAuthSubmit = (phone: string) => {
-  const router = useRouter();
+export const useAuthSubmit = (phone: string, lang: any) => {
+  const { push } = useRouter();
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -20,7 +20,7 @@ export const useAuthSubmit = (phone: string) => {
 
     if(!phone) return
     
-    const phoneValidationError = validatePhone(phone);
+    const phoneValidationError = validatePhone(phone, lang);
     if (phoneValidationError) {
       setError(phoneValidationError);
       return false;
@@ -33,7 +33,7 @@ export const useAuthSubmit = (phone: string) => {
       const response = await fetch(`${HOST_API_KEY}/api/?results=1&nat=us`);
 
       if (!response.ok) {
-        throw new Error("User information not received.");
+        throw new Error(lang.user_info_error)
       }
 
       const data: IRandomUserResponse = await response.json();
@@ -41,15 +41,16 @@ export const useAuthSubmit = (phone: string) => {
       if (data.results && data.results.length > 0) {
         const user = data.results[0];
         saveUserToStorage(user);
-        router.push("/dashboard");
-        toast.success("Welcome to the Dashboard!");
+        push(`/dashboard`)
+        toast.success(lang.welcome_dashboard)
         return true;
       } else {
-        throw new Error("User information not received.");
+        throw new Error(lang.user_info_error)
       }
     } catch (error) {
-      setError(`Error. Please try again.. ${error}`);
-      toast.error("Error. Please try again.!");
+      const errorMessage = error instanceof Error ? error.message : lang.login_error
+      setError(`${lang.login_error} ${errorMessage}`)
+      toast.error(lang.login_error)
       return false;
     } finally {
       setLoading(false);

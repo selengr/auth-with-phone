@@ -3,9 +3,10 @@
 import type React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 // css
-import ThemeToggle from "@/components/ThemeToggle/ThemeToggle"
-// components
 import styles from "@/components/ThemeToggle/ThemeToggle.module.scss"
+// components
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle"
+import LocaleSwitcher from "@/section/dashboard/Header/LocaleSwitcher"
 
 type Theme = "light" | "dark"
 
@@ -61,6 +62,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className={styles.themeToggleContainer}>
         <ThemeToggle />
+        <LocaleSwitcher />
       </div>
       {children}</ThemeContext.Provider>
 }

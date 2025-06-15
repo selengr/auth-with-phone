@@ -1,6 +1,7 @@
 "use client";
-
+// React & Libs
 import type React from "react";
+import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 // css
@@ -12,18 +13,25 @@ import { useAuthSubmit } from "@/hooks/useAuthSubmit";
 // utils
 import { formatIranianPhone, getUserFromStorage } from "@/utils";
 
-const AuthPage: React.FC = () => {
-  const router = useRouter();
-  const [phone, setPhone] = useState<string>("");
 
-  const { handleSubmit, loading, error: phoneError, setError: setPhoneError } = useAuthSubmit(phone);
+interface IProps {
+    lang : any
+ }
+  
+  const AuthPage: NextPage<IProps> = ({lang}) => {
+  const { push } = useRouter();
+
+  const [phone, setPhone] = useState<string>("");
+  
+
+  const { handleSubmit, loading, error: phoneError, setError: setPhoneError } = useAuthSubmit(phone, lang);
 
   useEffect(() => {
     const existingUser = getUserFromStorage();
     if (existingUser) {
-      router.push("/dashboard");
+      push(`/dashboard`)
     }
-  }, [router]);
+  }, [push]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -39,8 +47,8 @@ const AuthPage: React.FC = () => {
   return (
     <div className={styles.authContainer}>
       <div className={styles.authCard}>
-        <h1 className={styles.title}>Sign in</h1>
-        <p className={styles.subtitle}>Enter your phone number</p>
+        <h1 className={styles.title}>{lang.sign_in}</h1>
+        <p className={styles.subtitle}>{lang.enter_phone_number}</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.phoneInputContainer}>
@@ -48,7 +56,7 @@ const AuthPage: React.FC = () => {
             <Input
               id="phone"
               type="tel"
-              label="phone number"
+              label={lang.phone_number}
               placeholder="912-345-6789"
               value={phone}
               onChange={handlePhoneChange}
@@ -66,11 +74,11 @@ const AuthPage: React.FC = () => {
             disabled={phone.length === 0}
             className={styles.submitButton}
           >
-            {loading ? "...submitting" : "submit"}
+            {loading ? lang.submitting : lang.submit}
           </Button>
         </form>
 
-        <div className={styles.footer}>welcome</div>
+        <div className={styles.footer}>{lang.welcome}</div>
       </div>
     </div>
   );

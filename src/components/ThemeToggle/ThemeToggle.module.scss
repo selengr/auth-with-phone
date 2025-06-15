@@ -42,10 +42,38 @@
       height: 2.25rem;
     }
   }
+  .logoutButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+  
+    &:hover {
+      background-color: var(--bg-hover);
+    }
+
+    position: absolute;
+    left: 3rem;
+    z-index: 10;
+
+    @media (max-width: 768px) {
+      height: 2.25rem;
+    }
+    }
 
 
 
   .themeToggleContainer {
+    display: flex;
+    flex-direction: row;
     position: absolute;
     top: 1rem;
     left: 1rem;
