@@ -1,0 +1,71 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display : flex;
+    justify-content : end;
+
+    &.required::after {
+      content: " *";
+      color: var(--error-color);
+    }
+  }
+  .input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    &.error {
+      border-color: var(--error-color);
+
+      &:focus {
+        border-color: var(--error-color);
+        box-shadow: 0 0 0 3px var(--error-light);
+      }
+    }
+
+    &:disabled {
+      background-color: var(--bg-secondary);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      padding: 0.625rem 0.875rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .errorMessage {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    height : .3rem;
+    display : flex;
+    justify-content : end;
+  }
+  .isRTL{
+    justify-content : start;
+  }
+
+}

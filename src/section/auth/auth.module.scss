@@ -1,0 +1,91 @@
+.authContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-auth);
+  padding: 1rem;
+  position: relative;
+
+  .authCard {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid var(--border-color);
+
+    .title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 0.875rem;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .phoneInputContainer {
+        position: relative;
+
+        .phonePrefix {
+          position: absolute;
+          left: .6rem;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--text-muted);
+          font-size: 1rem;
+          pointer-events: none;
+          z-index: 1;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+          display : flex;
+          justify-content : end;
+        }
+
+        .phoneInput {
+          padding-left: 3rem !important;
+          direction: ltr;
+          text-align: left;
+        }
+      }
+
+      .submitButton {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
+}

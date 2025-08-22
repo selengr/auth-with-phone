@@ -1,0 +1,33 @@
+{
+    "auth": {
+      "sign_in": "Sign in",
+      "enter_phone_number": "Enter your phone number",
+      "phone_number": "Phone number",
+      "submitting": "...Submitting",
+      "submit": "Submit",
+      "welcome": "Welcome",
+      "phone_validation_required": "Phone number is required",
+      "phone_validation_digits": "Phone number must be exactly 10 digits",
+      "phone_validation_start_nine": "Phone number must start with 9",
+      "phone_validation_invalid": "Phone number is not valid",
+      "welcome_dashboard": "Welcome to the Dashboard!",
+      "user_info_error": "User information not received.",
+      "login_error": "Error. Please try again.",
+      "network_error": "Network error. Please check your connection."
+    },
+    "dashboard" : {
+      "index": "Dashboard",
+      "sign_out": "Sign out",
+      "welcome_to_dashboard": "Welcome to the Dashboard!",
+      "hi_user": "Hi",
+      "profile": "Profile",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "city": "City",
+      "country": "Country",
+      "age": "Age",
+      "username": "Username",
+      "years_old": "years old"
+    }
+  }
