@@ -76,7 +76,7 @@ export default function IoTDashboard() {
     fetchData();
     const interval = setInterval(() => {
       fetchData(); // Check for temperature changes every 5 seconds
-    }, 15000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
